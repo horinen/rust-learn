@@ -1,49 +1,90 @@
+use std::io;
+
 fn main() 
 {
     let vowel = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+    let s1 = "ay";
+    let s0 = "hay";
 
-    let s = String::from("initial contents");
+    let mut s = String::new();
 
     let mut new_word_flag = true;
 
-    let mut count_num = 0;
-    let mut word_start:i32;
-    let mut word_stop:i32;
+    let mut print_str = String::new();;
+
+    let mut juage = 1;  //1 = consonant  0 = vowel
+
+    let mut first_char  = ' ';
+
+    println!("please input string");
+
+    io::stdin().read_line(&mut s);
 
     for c in s.chars() 
     {
-        count_num += 1;
-        if c == ' '
+        if true //Determine whether it is a letter or a space //Too lazy to implement this function
         {
-            if new_word_flag == false
+            if c == ' '
             {
-                new_word_flag = true;
-                word_stop = count_num - 1;
-                print_str = s[word_start..word_stop];
-            }
-            continue;
-        }
-        else if new_word_flag == true
-        {
-            new_word_flag = false;
-            word_start = count_num;
-
-            let mut juage = 1;  //vowel
-            for i in vowel
-            {
-                if c == i
+                if new_word_flag == false
                 {
-                    juage = 0;
-                    break;
+                    new_word_flag = true;
+                    print_str.push( '-' );
+                    if juage == 1
+                    {
+                        print_str.push( first_char );
+                        print_str.push_str( s1 );
+                    }
+                    else
+                    {
+                        print_str.push_str( s0 );
+                    }
+                    print_str.push( ' ' );
+                }
+                continue;
+            }
+            else if new_word_flag == true
+            {
+                new_word_flag = false;
+
+                juage = 1;
+                
+                for i in vowel
+                {
+                    if c == i
+                    {
+                        juage = 0;
+                        break;
+                    }
+                }
+
+                if juage == 0 
+                {
+                    print_str.push( c );
+                }
+                else
+                {
+                    first_char = c;
                 }
             }
-
-            if juage == 0 
+            else
             {
-                
+                print_str.push( c );
             }
         }
     }
 
-    println!("Hello, world!");
+    print_str.push( '-' );
+    if juage == 1
+    {
+        print_str.push( first_char );
+        print_str.push_str( s1 );
+    }
+    else
+    {
+        print_str.push_str( s0 );
+    }
+    print_str.push( ' ' );
+
+    println!("{}",print_str);
 }
