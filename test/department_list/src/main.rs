@@ -4,7 +4,7 @@ use std::io;
 struct personnel
 {
     staff:String,
-    department:String
+    department:String,
 }
 
 fn main() 
@@ -35,13 +35,24 @@ fn main()
 
 fn write_to_list( depart_list:& mut HashMap< String, String > )
 {
-    print!("Department is :");
+    let mut department = String::new();
+    let mut staff = String::new();
 
-    personnel.department
+    println!("Department is :");
 
-    io::stdin().read_line(&mut choose).expect("Failed to read line");
+    io::stdin().read_line(&mut department).expect("Failed to read line");
 
-    print!("Staff name is :");
+    println!("Staff name is :");
+
+    io::stdin().read_line(&mut staff).expect("Failed to read line");
+
+    /*let p1 = personnel {
+        staff:staff,
+        department:department,
+    };
+
+    depart_list.insert(personnel.staff, personnel.department);*/
+    depart_list.insert(staff, department);
 }
 
 fn read_list( depart_list:&HashMap< String, String > )
